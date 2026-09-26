@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('https://s3.eu-central-1.amazonaws.com/weka-alps-media/media/wasteManagementWorld/_800x418_crop_center-center_82_none/AdobeStock_238058405.jpeg?mtime=1666340875');
+        
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+</head>
+<body class="min-h-screen flex justify-center items-center text-white">
+
+<div class="bg-white/10 p-8 rounded-2xl w-full max-w-md text-center shadow-2xl">
+    <h1 class="text-3xl font-bold mb-6">♻️ Recycle AI <br>Login</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mb-4">
+          {% for category, message in messages %}
+            <p class="px-4 py-2 rounded {{ 'bg-red-600 text-white' if category=='danger' else 'bg-green-600 text-white' }}">
+              {{ message }}
+            </p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username" required
+            class="w-full p-3 mb-4 rounded-xl bg-white/20 text-white placeholder-white focus:outline-none">
+        <input type="password" name="password" placeholder="Password" required
+            class="w-full p-3 mb-4 rounded-xl bg-white/20 text-white placeholder-white focus:outline-none">
+        <button type="submit"
+            class="w-full bg-green-500 p-3 rounded-xl font-semibold hover:bg-green-600 transition">Login</button>
+    </form>
+
+    <p class="mt-4">New user? <a href="/register" class="text-green-300 underline">Register here</a></p>
+</div>
+
+</body>
+</html>

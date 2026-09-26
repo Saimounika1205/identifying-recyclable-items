@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('https://s3.eu-central-1.amazonaws.com/weka-alps-media/media/wasteManagementWorld/_800x418_crop_center-center_82_none/AdobeStock_238058405.jpeg?mtime=1666340875');
+        
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+</head>
+
+<body class="bg-green-500 min-h-screen flex flex-col items-center py-20 text-white">
+
+<!-- Container -->
+<div class="bg-white/10 p-10 rounded-2xl w-full max-w-5xl text-center shadow-lg">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full flex justify-between items-center px-10 py-4 
+    bg-white/20 backdrop-blur-md shadow-lg z-50">
+        <h1 class="text-2xl font-bold tracking-wide">♻️ Recycle AI</h1>
+        <div class="space-x-6 font-medium text-lg">
+            <a href="/" class="hover:text-green-300 transition">Home</a>
+            <a href="/about" class="hover:text-green-300 transition">About</a>
+            <a href="/categories" class="hover:text-green-300 transition">Categories</a>
+            <a href="/history" class="hover:text-green-300 transition">History</a>
+            <a href="/dashboard" class="hover:text-green-300 transition">Dashboard</a>
+            <a href="/recycle_units" class="hover:text-green-300 transition">Recycle Units</a>
+            {% if current_user.is_authenticated %}
+                <a href="/logout" class="hover:text-red-400 transition">Logout</a>
+            {% else %}
+                <a href="/login" class="hover:text-green-300 transition">Login</a>
+                <a href="/register" class="hover:text-green-300 transition">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <h1 class="text-3xl font-bold mb-6 mt-6">♻️ Waste Categories & Recyclability</h1>
+    <p class="mb-6 text-lg">Learn which types of waste are recyclable, and where you can take them!</p>
+
+    <!-- Categories Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+
+        <div class="p-6 rounded-xl shadow hover:bg-green-600 transition bg-green-400/30">
+            <h2 class="font-bold text-xl mb-2">🟢 Plastic</h2>
+            <p>✅ Recyclable</p>
+            <button onclick="toggleInfo('plastic')" class="mt-2 text-white underline">More Info</button>
+            <div id="plastic" class="hidden mt-2 text-sm">
+                Examples: Bottles, Containers, Packaging<br>
+                Tip: Rinse before recycling.
+            </div>
+        </div>
+
+        <div class="p-6 rounded-xl shadow hover:bg-green-600 transition bg-green-400/30">
+            <h2 class="font-bold text-xl mb-2">🟢 Glass</h2>
+            <p>✅ Recyclable</p>
+            <button onclick="toggleInfo('glass')" class="mt-2 text-white underline">More Info</button>
+            <div id="glass" class="hidden mt-2 text-sm">
+                Examples: Jars, Bottles, Windows<br>
+                Tip: Remove lids before recycling.
+            </div>
+        </div>
+
+        <div class="p-6 rounded-xl shadow hover:bg-orange-500 transition bg-orange-400/30">
+            <h2 class="font-bold text-xl mb-2">🟠 E-Waste</h2>
+            <p>⚠️ Special Handling Required</p>
+            <button onclick="toggleInfo('ewaste')" class="mt-2 text-white underline">More Info</button>
+            <div id="ewaste" class="hidden mt-2 text-sm">
+                Examples: Old phones, Batteries, Electronics<br>
+                Tip: Take to certified e-waste recycling centers.
+            </div>
+        </div>
+
+        <div class="p-6 rounded-xl shadow hover:bg-red-500 transition bg-red-400/30">
+            <h2 class="font-bold text-xl mb-2">🔴 Non-Recyclable Waste</h2>
+            <p>❌ Not Recyclable</p>
+            <button onclick="toggleInfo('nonrecyclable')" class="mt-2 text-white underline">More Info</button>
+            <div id="nonrecyclable" class="hidden mt-2 text-sm">
+                Examples: Diapers, Sanitary products, Contaminated packaging
+            </div>
+        </div>
+
+        <div class="p-6 rounded-xl shadow hover:bg-green-600 transition bg-green-400/30">
+            <h2 class="font-bold text-xl mb-2">🟢 Paper & Cardboard</h2>
+            <p>✅ Recyclable</p>
+            <button onclick="toggleInfo('paper')" class="mt-2 text-white underline">More Info</button>
+            <div id="paper" class="hidden mt-2 text-sm">
+                Examples: Newspapers, Magazines, Office Paper<br>
+                Tip: Flatten cardboard boxes.
+            </div>
+        </div>
+
+        <div class="p-6 rounded-xl shadow hover:bg-green-600 transition bg-green-400/30">
+            <h2 class="font-bold text-xl mb-2">🟢 Organic Waste</h2>
+            <p>✅ Recyclable via Composting</p>
+            <button onclick="toggleInfo('organic')" class="mt-2 text-white underline">More Info</button>
+            <div id="organic" class="hidden mt-2 text-sm">
+                Examples: Food scraps, Garden waste<br>
+                Tip: Compost at home or community gardens.
+            </div>
+        </div>
+
+    </div>
+
+    <p class="mt-6 text-green-200 font-semibold">Tip: Check local recycling centers for specific rules!</p>
+
+</div>
+
+<script>
+function toggleInfo(id) {
+    const elem = document.getElementById(id);
+    elem.classList.toggle('hidden');
+}
+</script>
+
+</body>
+</html>

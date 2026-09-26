@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body {
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('https://s3.eu-central-1.amazonaws.com/weka-alps-media/media/wasteManagementWorld/_800x418_crop_center-center_82_none/AdobeStock_238058405.jpeg?mtime=1666340875');
+        
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+</head>
+
+<body class="min-h-screen text-white flex justify-center items-start pt-28">
+
+<!-- Main container -->
+<div class="bg-white/10 p-8 rounded w-full max-w-lg text-center shadow-lg">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full flex justify-between items-center px-10 py-4 
+        bg-white/20 backdrop-blur-md shadow-lg z-50">
+
+        <h1 class="text-2xl font-bold tracking-wide">♻️ Recycle AI</h1>
+
+        <div class="space-x-8 font-medium text-lg">
+            <a href="/" class="hover:text-green-300 transition">Home</a>
+            <a href="/about" class="hover:text-green-300 transition">About</a>
+            <a href="/categories" class="hover:text-green-300 transition">Categories</a>
+            <a href="/history" class="hover:text-green-300 transition">History</a>
+            <a href="/dashboard" class="hover:text-green-300 transition">Dashboard</a>
+            <a href="/recycle_units" class="hover:text-green-300 transition">Recycle Units</a>
+
+            {% if current_user.is_authenticated %}
+                <a href="/logout" class="hover:text-red-400 transition">Logout</a>
+            {% else %}
+                <a href="/login" class="hover:text-green-300 transition">Login</a>
+                <a href="/register" class="hover:text-green-300 transition">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <h1 class="text-2xl mb-4 font-bold">Dashboard</h1>
+
+    <p>Total Predictions: <span class="font-semibold">{{ total }}</span></p>
+    <p>Recyclable: <span class="font-semibold">{{ recyclable }}</span></p>
+    <p>Non-Recyclable: <span class="font-semibold">{{ non_recyclable }}</span></p>
+
+    <canvas id="pieChart" class="mt-6"></canvas>
+</div>
+
+<script>
+const ctx = document.getElementById('pieChart');
+
+new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Recyclable', 'Non-Recyclable'],
+        datasets: [{
+            data: [{{ recyclable }}, {{ non_recyclable }}],
+            backgroundColor: ['#34D399', '#F87171']  // green & red colors
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { color: '#fff', font: { size: 14 } }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
